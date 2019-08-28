@@ -1,0 +1,67 @@
+{
+  "name": "@gamaops/identity-service",
+  "version": "0.0.0",
+  "description": "Person service",
+  "main": "index.js",
+  "scripts": {
+    "lint": "tslint --fix -c 'tslint.json' -e './node_modules/**/*' './**/*.ts'",
+    "prebuild": "rimraf build",
+    "serve": "node build/index.js | ./node_modules/.bin/bunyan",
+    "build": "tsc",
+    "start": "tsc -w",
+    "coverage": "nyc npm run test",
+    "test": "mocha 'specs/unit/**/*.spec.ts' -b -r 'ts-node/register' -r 'module-alias/register'",
+    "test:tdd": "npm run test:unit -- -w --extension ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gamaops/identity-service.git"
+  },
+  "keywords": [
+    "identity",
+    "service"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gamaops/identity-service/issues"
+  },
+  "homepage": "https://github.com/gamaops/identity-service#readme",
+  "devDependencies": {
+    "@types/bcrypt": "^3.0.0",
+    "@types/bunyan": "^1.8.6",
+    "@types/chai": "^4.1.7",
+    "@types/glob": "^7.1.1",
+    "@types/jsonwebtoken": "^8.3.3",
+    "@types/mocha": "^5.2.7",
+    "@types/mock-require": "^2.0.0",
+    "@types/mongoose": "^5.5.13",
+    "@types/node": "^12.0.8",
+    "@types/sinon": "^7.0.13",
+    "@types/uuid": "^3.4.5",
+    "chai": "^4.2.0",
+    "mocha": "^6.1.4",
+    "mock-require": "^3.0.3",
+    "module-alias": "^2.2.0",
+    "nyc": "^14.1.1",
+    "rimraf": "^2.7.1",
+    "sinon": "^7.3.2",
+    "ts-node": "^8.3.0",
+    "tslint": "^5.17.0",
+    "typescript": "^3.5.2"
+  },
+  "dependencies": {
+    "@gamaops/backend-framework": "git+ssh://git@github.com/gamaops/backend-framework.git",
+    "@gamaops/definitions": "git+ssh://git@github.com/gamaops/definitions.git",
+    "bcrypt": "3.0.4-napi",
+    "bunyan": "^1.8.12",
+    "dotenv-defaults": "^1.0.2",
+    "hfxbus": "^2.0.1-rc.3",
+    "hfxworker": "^1.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.6.9",
+    "prom-client": "^11.5.3",
+    "protobufjs": "^6.8.8",
+    "uuid": "^3.3.3"
+  }
+}
