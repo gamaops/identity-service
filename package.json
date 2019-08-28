@@ -1,7 +1,7 @@
 {
   "name": "@gamaops/identity-service",
   "version": "0.0.0",
-  "description": "Person service",
+  "description": "Identity service",
   "main": "index.js",
   "scripts": {
     "lint": "tslint --fix -c 'tslint.json' -e './node_modules/**/*' './**/*.ts'",
