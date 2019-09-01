@@ -67,8 +67,20 @@ export async function validateSignUp(
 		pushJobValidateSignUpResponse,
 	} = this.fncs();
 
-	const jobId = job.id;
-	this.logger.info({jobId}, 'Received new job');
+	const tracing = {
+		jobs:[
+			{
+				id: job.id,
+				stream: 'ValidateSignUp',
+				groups: [
+					'IdentityService'
+				],
+				role: 'consumer'
+			}
+		]
+	};
+
+	this.logger.info(tracing, 'Received new job');
 
 	const {
 		request,
@@ -79,7 +91,7 @@ export async function validateSignUp(
 		this.validateSignUpRequestType,
 	);
 
-	this.logger.debug({validateSignUpRequest}, 'Validate sign up request');
+	this.logger.debug({...tracing, validateSignUpRequest}, 'Validate sign up request');
 
 	const { signUpId, validationCode } = validateSignUpRequest;
 
@@ -91,7 +103,7 @@ export async function validateSignUp(
 	const signUp = await query.exec();
 
 	if (signUp === null || signUp.validationCode === null) {
-		this.logger.debug({signUp}, 'Sign up not found or validation code is null');
+		this.logger.debug({...tracing, signUp}, 'Sign up not found or validation code is null');
 		await pushJobValidateSignUpResponse(job, {success: false});
 		return;
 	}
@@ -99,12 +111,12 @@ export async function validateSignUp(
 	const isValidCode = await validateHash(validationCode, signUp.validationCode);
 
 	if (!isValidCode) {
-		this.logger.debug({signUp}, 'Invalid validation code');
+		this.logger.debug({...tracing, signUp}, 'Invalid validation code');
 		await pushJobValidateSignUpResponse(job, {success: false});
 		return;
 	}
 
-	this.logger.debug({signUpId}, 'Sign up is valid and validation code will be removed');
+	this.logger.debug({...tracing, signUpId}, 'Sign up is valid and validation code will be removed');
 
 	const updatedData: IOperationsDates = getJobOperationDate(job, JobOperation.UPDATE);
 
@@ -135,7 +147,7 @@ export async function validateSignUp(
 		},
 	);
 
-	this.logger.debug({signUpId}, 'Identity token generated for sign up');
+	this.logger.debug({...tracing, signUpId}, 'Identity token generated for sign up');
 
 	await pushJobValidateSignUpResponse(job, {success: true, identityToken}, updatedData);
 

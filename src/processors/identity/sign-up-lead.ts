@@ -50,13 +50,25 @@ export async function signUpLead(
 
 	this.callsCounter.inc({function: 'signUpLead'});
 
+	const tracing = {
+		jobs:[
+			{
+				id: job.id,
+				stream: 'SignUpLead',
+				groups: [
+					'IdentityService'
+				],
+				role: 'consumer'
+			}
+		]
+	};
+
+	this.logger.info(tracing, 'Received new job');
+
 	const {
 		generateValidationCode,
 		pushJobSignUpLead,
 	} = this.fncs();
-
-	const jobId = job.id;
-	this.logger.info({jobId}, 'Received new job');
 
 	const {
 		request,
@@ -67,7 +79,7 @@ export async function signUpLead(
 		this.signUpLeadRequestType,
 	);
 
-	this.logger.debug({createLeadRequest}, 'Create lead request');
+	this.logger.debug({...tracing, createLeadRequest}, 'Create lead request');
 
 	let { signUpLead } = createLeadRequest;
 
@@ -75,7 +87,7 @@ export async function signUpLead(
 
 	if (signUpLead.signUpId) {
 		const { signUpId } = signUpLead;
-		this.logger.debug({signUpId}, 'Lead will be updated');
+		this.logger.debug({...tracing, signUpId}, 'Lead will be updated');
 		const updatedData = getJobOperationDate(job, JobOperation.UPDATE);
 
 		Object.assign(
@@ -97,7 +109,7 @@ export async function signUpLead(
 
 		await query.exec();
 
-		this.logger.debug({signUpId}, 'Lead updated');
+		this.logger.debug({...tracing, signUpId}, 'Lead updated');
 
 		signUpLead.updatedAt = (signUpLead.updatedAt as Date).toISOString();
 		await pushJobSignUpLead(job, signUpLead);
@@ -118,7 +130,7 @@ export async function signUpLead(
 
 	await signUpModel.save();
 
-	this.logger.info({jobId, signUpId}, 'Lead saved');
+	this.logger.info({...tracing, signUpId}, 'Lead saved');
 
 	signUpLead.createdAt = (signUpLead.createdAt as Date).toISOString();
 
