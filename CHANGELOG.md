@@ -1,3 +1,12 @@
+## 2019-09-01T10:12:10.768Z
+### 🆕 - add code or file(s) (project)
+
+#### none
+
+- Add logging standard
+
+-----------------------------
+
 ## 2019-08-28T17:20:16.860Z
 ### 🐛 - fixing a bug (project)
 
