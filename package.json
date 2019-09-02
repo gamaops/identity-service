@@ -1,6 +1,6 @@
 {
   "name": "@gamaops/identity-service",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Identity service",
   "main": "index.js",
   "scripts": {
