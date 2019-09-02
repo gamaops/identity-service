@@ -108,7 +108,7 @@ const execute = async () => {
 			await consumers.identity.pause(parseInt(process.env.CONSUMER_PAUSE_TIMEOUT!));
 			logger.warn('Identity consumer stopped');
 		} catch (error) {
-			logger.error(error, 'Identity consumer pause error');
+			logger.error({error}, 'Identity consumer pause error');
 		}
 
 		try {
@@ -117,7 +117,7 @@ const execute = async () => {
 			});
 			logger.warn('Bus connection (redis) stopped');
 		} catch (error) {
-			logger.error(error, 'Bus connection (redis) stop error');
+			logger.error({error}, 'Bus connection (redis) stop error');
 		}
 
 		try {
@@ -125,14 +125,14 @@ const execute = async () => {
 			await pools.cryptography.clear();
 			logger.warn('Cryptography worker pool drained');
 		} catch (error) {
-			logger.error(error, 'Error while draining cryptography worker pool');
+			logger.error({error}, 'Error while draining cryptography worker pool');
 		}
 
 		try {
 			await mongoose.disconnect();
 			logger.warn('Mongoose disconnected');
 		} catch (error) {
-			logger.error(error, 'Error while disconnecting mongoose');
+			logger.error({error}, 'Error while disconnecting mongoose');
 		}
 
 		metrics.up.set(0);
@@ -141,7 +141,7 @@ const execute = async () => {
 			metrics.close();
 			logger.warn('Metrics server closed');
 		} catch (error) {
-			logger.error(error, 'Error while closing metrics server');
+			logger.error({error}, 'Error while closing metrics server');
 		}
 
 	});
@@ -151,5 +151,5 @@ const execute = async () => {
 execute().then(() => {
 	logger.info('App started');
 }).catch((error) => {
-	logger.fatal(error);
+	logger.fatal({error});
 });

@@ -68,16 +68,16 @@ export async function validateSignUp(
 	} = this.fncs();
 
 	const tracing = {
-		jobs:[
+		jobs: [
 			{
 				id: job.id,
 				stream: 'ValidateSignUp',
 				groups: [
-					'IdentityService'
+					'IdentityService',
 				],
-				role: 'consumer'
-			}
-		]
+				role: 'consumer',
+			},
+		],
 	};
 
 	this.logger.info(tracing, 'Received new job');
