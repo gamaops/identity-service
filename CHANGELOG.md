@@ -1,3 +1,12 @@
+## 2019-09-02T09:33:57.628Z
+### 👷 - adding CI build (project)
+
+#### none
+
+- Add travis and Dockerfile
+
+-----------------------------
+
 ## 2019-09-01T10:12:10.768Z
 ### 🆕 - add code or file(s) (project)
 
