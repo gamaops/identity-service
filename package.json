@@ -7,11 +7,10 @@
     "lint": "tslint --fix -c 'tslint.json' -e './node_modules/**/*' './**/*.ts'",
     "prebuild": "rimraf build",
     "serve": "node build/index.js | ./node_modules/.bin/bunyan",
-    "serve-production": "node --inspect=0.0.0.0:9229 build/index.js | ./node_modules/.bin/bunyan",
     "build": "tsc",
     "start": "tsc -w",
     "coverage": "nyc npm run test",
-    "test": "mocha 'specs/unit/**/*.spec.ts' -b -r 'ts-node/register' -r 'module-alias/register'",
+    "test:unit": "mocha 'specs/unit/**/*.spec.ts' -b -r 'ts-node/register' -r 'module-alias/register'",
     "test:tdd": "npm run test:unit -- -w --extension ts"
   },
   "repository": {

@@ -51,16 +51,16 @@ export async function signUpLead(
 	this.callsCounter.inc({function: 'signUpLead'});
 
 	const tracing = {
-		jobs:[
+		jobs: [
 			{
 				id: job.id,
 				stream: 'SignUpLead',
 				groups: [
-					'IdentityService'
+					'IdentityService',
 				],
-				role: 'consumer'
-			}
-		]
+				role: 'consumer',
+			},
+		],
 	};
 
 	this.logger.info(tracing, 'Received new job');
