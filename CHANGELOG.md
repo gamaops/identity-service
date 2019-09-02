@@ -1,3 +1,12 @@
+## 2019-09-02T09:39:27.304Z
+### 💚 - fixing the CI build (project)
+
+#### none
+
+- Change github dependencies to https
+
+-----------------------------
+
 ## 2019-09-02T09:33:57.628Z
 ### 👷 - adding CI build (project)
 

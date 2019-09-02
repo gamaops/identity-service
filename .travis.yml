@@ -5,7 +5,6 @@ if: "(branch != master AND type = pull_request) OR (branch = master AND commit_m
 stages:
 - test
 - Build and Tag
-- deploy
 script:
 - npm run lint
 #- npm run test:unit
