@@ -1,3 +1,12 @@
+## 2019-09-02T11:43:36.093Z
+### 🐋 - work about Docker (deployment)
+
+#### none
+
+- Add git to Docker image
+
+-----------------------------
+
 ## 2019-09-02T09:39:27.304Z
 ### 💚 - fixing the CI build (project)
 
