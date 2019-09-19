@@ -8,10 +8,11 @@ import {
 	createMetricsServer,
 	createWorkerPools,
 	enableBackendRuntimeMetrics,
+	buildRedisConnection,
 	loadProtosDefinitions,
 	logger,
 } from '@gamaops/backend-framework';
-import { ConnectionManager } from 'hfxbus';
+import { DISTRIBUTED_ROUTING } from 'hfxbus';
 import mongoose from 'mongoose';
 import { URL } from 'url';
 import {
@@ -42,8 +43,6 @@ const execute = async () => {
 
 	logger.info('Loading app');
 
-	const redisUrl = new URL(process.env.REDIS_URI!);
-
 	logger.debug(process.env, 'Loaded environment variables');
 
 	logger.info('Loading protos');
@@ -72,14 +71,14 @@ const execute = async () => {
 
 	logger.info('Mongoose ready');
 
-	const busConnection = ConnectionManager.standalone({
-		host: redisUrl.hostname,
-		port: parseInt(redisUrl.port),
-	});
+	const redis = buildRedisConnection(process.env.REDIS_URI!);
 
-	const consumers = buildConsumers<IProcessorConsumers>(busConnection, {
+	const consumers = buildConsumers<IProcessorConsumers>(redis, {
 		identity: {
 			group: 'IdentityService',
+			route: DISTRIBUTED_ROUTING,
+			concurrency: parseInt(process.env.IDENTITY_CONSUMER_CONCURRENCY!),
+			claimInterval: parseInt(process.env.IDENTITY_CONSUMER_CLAIM_INTERVAL!)
 		},
 	});
 
@@ -112,7 +111,7 @@ const execute = async () => {
 		}
 
 		try {
-			await busConnection.stop({
+			await redis.stop({
 				maxWait: parseInt(process.env.REDIS_STOP_TIMEOUT!),
 			});
 			logger.warn('Bus connection (redis) stopped');
