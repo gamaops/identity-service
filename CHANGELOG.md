@@ -1,3 +1,12 @@
+## 2019-09-20T10:38:20.867Z
+### ⬆️ - upgrading dependencies (project)
+
+#### none
+
+- Fix package-lock
+
+-----------------------------
+
 ## 2019-09-19T16:05:23.648Z
 ### 🆕 - add code or file(s) (project)
 
