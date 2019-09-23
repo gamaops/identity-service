@@ -9,6 +9,8 @@
     "serve": "node build/index.js | ./node_modules/.bin/bunyan",
     "build": "tsc",
     "start": "tsc -w",
+    "pm2:up": "pm2 start build/index.js --name identity-service",
+    "pm2:down": "pm2 del identity-service",
     "coverage": "nyc npm run test",
     "test:unit": "mocha 'specs/unit/**/*.spec.ts' -b -r 'ts-node/register' -r 'module-alias/register'",
     "test:tdd": "npm run test:unit -- -w --extension ts"
