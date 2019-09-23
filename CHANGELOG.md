@@ -1,3 +1,12 @@
+## 2019-09-23T18:01:43.383Z
+### 💚 - fixing the CI build (project)
+
+#### none
+
+- Fix travis PR test condition
+
+-----------------------------
+
 ## 2019-09-20T10:38:20.867Z
 ### ⬆️ - upgrading dependencies (project)
 
