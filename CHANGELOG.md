@@ -1,3 +1,12 @@
+## 2019-09-25T01:13:43.846Z
+### ⬆️ - upgrading dependencies (project)
+
+#### none
+
+- Upgrade HFXBus
+
+-----------------------------
+
 ## 2019-09-23T18:01:43.383Z
 ### 💚 - fixing the CI build (project)
 
