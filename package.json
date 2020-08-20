@@ -56,7 +56,7 @@
   "dependencies": {
     "@gamaops/backend-framework": "git+https://git@github.com/gamaops/backend-framework.git",
     "@gamaops/definitions": "git+https://git@github.com/gamaops/definitions.git",
-    "bcrypt": "3.0.4-napi",
+    "bcrypt": "5.0.0",
     "bunyan": "^1.8.12",
     "dotenv-defaults": "^1.0.2",
     "hfxbus": "^2.2.0",
